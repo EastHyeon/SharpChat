@@ -11,10 +11,14 @@ class PacketHandler
         C_Chat chatPacket = packet as C_Chat;
         ClientSession clientSession = session as ClientSession;
 
-        if (clientSession.room == null)
+        if (clientSession.Room == null)
             return;
 
-        Console.WriteLine($"{chatPacket.username}: {chatPacket.chat}");
-        clientSession.room.BroadCast(clientSession, chatPacket.username,chatPacket.chat);
+        GameRoom room = clientSession.Room;
+        room.Push(
+            () => clientSession.Room.BroadCast(clientSession, chatPacket.username, chatPacket.chat)
+        );
+
+        //Console.WriteLine($"{chatPacket.username}/{clientSession.SessionID}: {chatPacket.chat}");
     }
 }

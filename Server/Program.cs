@@ -12,7 +12,7 @@ namespace Server
     class Program
 	{
 		static Listener _listener = new Listener();
-		public static GameRoom room = new GameRoom();
+		public static GameRoom Room = new GameRoom();
 
 		static void Main(string[] args)
 		{
@@ -23,10 +23,12 @@ namespace Server
 
 			_listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
 			Console.WriteLine("Listening...");
-
+			
 			while (true)
 			{
-				;
+				
+				Room.Push(() => Room.Execute());
+				Thread.Sleep(250);
 			}
 		}
 	}

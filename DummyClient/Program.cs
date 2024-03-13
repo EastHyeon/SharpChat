@@ -14,7 +14,7 @@ namespace DummyClient
 		static void Main(string[] args)
 		{
             Console.Write("닉네임을 입력하십시오: ");
-            string userName = Console.ReadLine();
+            string userName = "test";
 
             // DNS (Domain Name System)
 			IPAddress ipAddr = IPAddress.Parse("220.76.143.34");
@@ -22,19 +22,24 @@ namespace DummyClient
 
 			Connector connector = new Connector();
 
-			connector.Connect(endPoint, () => { return SessionManager.Instance.Generate(); });
+			connector.Connect(
+				endPoint, 
+				() => { return SessionManager.Instance.Generate(); }, 
+				500);
 
 			while (true)
 			{
 				try
 				{
-					SessionManager.Instance.Send(userName, Console.ReadLine());
+					SessionManager.Instance.SendForEach(userName, "");
 				}
 				catch (Exception e)
 				{
 					Console.WriteLine(e.ToString());
 				}
-			}
+
+                Thread.Sleep(250);
+            }
 		}
 	}
 }
