@@ -11,7 +11,7 @@ public enum PacketID
 	
 }
 
-interface IPacket
+public interface IPacket
 {
 	ushort Protocol { get; }
 	void Read(ArraySegment<byte> segment);
@@ -19,7 +19,7 @@ interface IPacket
 }
 
 
-class C_Chat : IPacket
+public class C_Chat : IPacket
 {
 	public string username;
 	public string chat;
@@ -69,7 +69,7 @@ class C_Chat : IPacket
 	}
 }
 
-class S_Chat : IPacket
+public class S_Chat : IPacket
 {
 	public int playerID;
 	public string username;
