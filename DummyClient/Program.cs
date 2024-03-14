@@ -13,12 +13,13 @@ namespace DummyClient
 	{
 		static void Main(string[] args)
 		{
-            Console.Write("닉네임을 입력하십시오: ");
             string userName = "test";
 
             // DNS (Domain Name System)
-			IPAddress ipAddr = IPAddress.Parse("220.76.143.34");
-			IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+            string hostname = Dns.GetHostName();
+            IPHostEntry entry = Dns.GetHostEntry(hostname);
+            IPAddress ipAddr = entry.AddressList[1];
+            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
 			Connector connector = new Connector();
 
