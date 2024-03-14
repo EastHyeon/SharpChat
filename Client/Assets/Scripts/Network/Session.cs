@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using UnityEngine;
 
 namespace ServerCore
 {
@@ -36,10 +37,6 @@ namespace ServerCore
                 processLen += dataSize;
 				buffer = new ArraySegment<byte>(buffer.Array, buffer.Offset + dataSize, buffer.Count - dataSize);
 			}
-
-			if (packetCount > 1)
-                Console.WriteLine($"패킷 모아 보내기 : {packetCount}");
-
             return processLen;
 		}
 
@@ -141,7 +138,7 @@ namespace ServerCore
             }
 			catch (Exception e)
 			{
-                Console.WriteLine($"RegisterSend Failed: {e}");
+                Debug.Log($"RegisterSend Failed: {e}");
 			}
 		}
 
@@ -163,7 +160,7 @@ namespace ServerCore
 					}
 					catch (Exception e)
 					{
-						Console.WriteLine($"OnSendCompleted Failed {e}");
+                        Debug.Log($"OnSendCompleted Failed {e}");
 					}
 				}
 				else
@@ -190,7 +187,7 @@ namespace ServerCore
 			}
 			catch (Exception e)
 			{
-                Console.WriteLine($"RegisterRecv Failed: {e}"); ;
+                Debug.Log($"RegisterRecv Failed: {e}"); ;
 			}
 		}
 
@@ -226,7 +223,7 @@ namespace ServerCore
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine($"OnRecvCompleted Failed {e}");
+                    Debug.Log($"OnRecvCompleted Failed {e}");
 				}
 			}
 			else

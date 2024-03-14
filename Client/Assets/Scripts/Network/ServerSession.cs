@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using ServerCore;
+using UnityEngine;
 
 namespace DummyClient
 {
@@ -10,18 +11,18 @@ namespace DummyClient
 	{
 		public override void OnConnected(EndPoint endPoint)
 		{
-			Console.WriteLine($"OnConnected : {endPoint}");
+            Debug.Log($"OnConnected : {endPoint}");
 
 		}
 
 		public override void OnDisconnected(EndPoint endPoint)
 		{
-			Console.WriteLine($"OnDisconnected : {endPoint}");
+            Debug.Log($"OnDisconnected : {endPoint}");
 		}
 
 		public override void OnRecvPacket(ArraySegment<byte> buffer)
 		{
-			PacketManager.Instance.OnRecvPacket(this, buffer);
+			PacketManager.Instance.OnRecvPacket(this, buffer, (s, p) => PacketQueue.Instance.Push(p));
 		}
 
 		public override void OnSend(int numOfBytes)
