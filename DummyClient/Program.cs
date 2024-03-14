@@ -7,8 +7,6 @@ using System.Threading;
 
 namespace DummyClient
 {
-	
-
 	class Program
 	{
 		static void Main(string[] args)
@@ -26,13 +24,13 @@ namespace DummyClient
 			connector.Connect(
 				endPoint, 
 				() => { return SessionManager.Instance.Generate(); }, 
-				500);
+				10);
 
 			while (true)
 			{
 				try
 				{
-					SessionManager.Instance.SendForEach(userName, "");
+					SessionManager.Instance.SendForEach(userName, Console.ReadLine());
 				}
 				catch (Exception e)
 				{
