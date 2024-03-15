@@ -11,8 +11,6 @@ namespace DummyClient
 	{
 		static void Main(string[] args)
 		{
-            string userName = "test";
-
             // DNS (Domain Name System)
             string hostname = Dns.GetHostName();
             IPHostEntry entry = Dns.GetHostEntry(hostname);
@@ -24,13 +22,13 @@ namespace DummyClient
 			connector.Connect(
 				endPoint, 
 				() => { return SessionManager.Instance.Generate(); }, 
-				10);
+				500);
 
 			while (true)
 			{
 				try
 				{
-					SessionManager.Instance.SendForEach(userName, Console.ReadLine());
+					// SessionManager.Instance.SendForEach();
 				}
 				catch (Exception e)
 				{

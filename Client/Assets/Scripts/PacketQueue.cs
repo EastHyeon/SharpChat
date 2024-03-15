@@ -9,7 +9,6 @@ public class PacketQueue
     Queue<IPacket> _packetQueue = new Queue<IPacket>();
     object _lock = new object();
 
-
     public void Push(IPacket packet)
     {
         lock (_lock)
@@ -27,5 +26,20 @@ public class PacketQueue
 
             return _packetQueue.Dequeue();
         }
+    }
+
+    public List<IPacket> PopAll()
+    {
+        List<IPacket> list = new List<IPacket>();
+
+        lock (_lock)
+        {
+            while (_packetQueue.Count > 0)
+            {
+                list.Add(_packetQueue.Dequeue());
+            }
+        }
+
+        return list;
     }
 }

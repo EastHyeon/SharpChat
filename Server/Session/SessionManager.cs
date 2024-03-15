@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,8 @@ namespace Server
 {
     internal class SessionManager
     {
-        static SessionManager _instance;
-        public static SessionManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new SessionManager();
-                return _instance;
-            }
-        }
+        static SessionManager _instance = new SessionManager();
+        public static SessionManager Instance { get { return _instance; } }
 
         int _sessionId = 0;
         Dictionary<int, ClientSession> _sessions = new Dictionary<int, ClientSession>();
@@ -30,8 +23,7 @@ namespace Server
                 int sessionId = ++_sessionId;
 
                 ClientSession session = new ClientSession();
-
-                session.SessionID = sessionId;
+                session.SessionId = sessionId;
                 _sessions.Add(sessionId, session);
 
                 Console.WriteLine($"Connected: {sessionId}");
@@ -54,7 +46,7 @@ namespace Server
         {
             lock (_lock)
             {
-                _sessions.Remove(session.SessionID);
+                _sessions.Remove(session.SessionId);
             }
         }
     }

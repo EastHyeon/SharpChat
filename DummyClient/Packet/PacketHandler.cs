@@ -6,10 +6,28 @@ using System.Text;
 
 class PacketHandler
 {
-    internal static void S_ChatHandler(PacketSession session, IPacket packet)
+    public static void S_BroadcastEnterGameHandler(PacketSession session, IPacket packet)
     {
-        S_Chat chatPacket = packet as S_Chat;
+        S_BroadcastEnterGame pkt = packet as S_BroadcastEnterGame;
         ServerSession serverSession = session as ServerSession;
-        //Console.WriteLine($"[{chatPacket.username}]: {chatPacket.chat}");
+
+    }
+
+    public static void S_BroadcastExitGameHandler(PacketSession session, IPacket packet)
+    {
+        S_BroadcastExitGame pkt = packet as S_BroadcastExitGame;
+        ServerSession serverSession = session as ServerSession;
+    }
+
+    public static void S_PlayerListHandler(PacketSession session, IPacket packet)
+    {
+        S_PlayerList pkt = packet as S_PlayerList;
+        ServerSession serverSession = session as ServerSession;
+    }
+
+    public static void S_BroadcastMoveHandler(PacketSession session, IPacket packet)
+    {
+        S_BroadcastMove pkt = packet as S_BroadcastMove;
+        ServerSession serverSession = session as ServerSession;
     }
 }
